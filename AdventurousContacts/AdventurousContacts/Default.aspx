@@ -24,15 +24,38 @@
 
             <article class="grey">
                 <section>
-                    <h2>Header 1</h2>
-                        <p>Text</p>
-                </section>
-            </article>
-
-            <article class="white">
-                <section>
-                    <h2>Header 2</h2>
-                        <p>Text</p>
+                    <h2>Kontaktlista</h2>
+                    <asp:ListView ID="ContactListView" runat="server" ItemType="AdventurousContacts.Models.Contact" SelectMethod="ContactListView_GetData" DataKeyNames="ContactID">
+                        <LayoutTemplate>
+                            <table class="normalTable">
+                                <tr class="normalTableHeader">
+                                    <th>
+                                        Förnamn
+                                    </th>
+                                    <th>
+                                        Efternamn
+                                    </th>
+                                    <th>
+                                        Epost
+                                    </th>
+                                </tr>
+                        <%-- Platshållare varje rad i tabellen --%>
+                        <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
+                            </table>
+                        </LayoutTemplate>
+                        <ItemTemplate>
+                            <%-- Mall för varje rad i databasen, dvs varje rad i tabellen som loopas fram.  --%>
+                            <tr>
+                                <td><%#: Item.FirstName %></td>
+                                <td><%#: Item.LastName %></td>
+                                <td><%#: Item.EmailAddress %></td>
+                            </tr>
+                        </ItemTemplate>
+                        <EmptyDataTemplate>
+                            <%-- Om inget finns i databasen presenteras detta istället.  --%>
+                            <p>Inga kontakter finns inlagda i databasen just nu.</p>
+                        </EmptyDataTemplate>
+                    </asp:ListView>
                 </section>
             </article>
         </div>

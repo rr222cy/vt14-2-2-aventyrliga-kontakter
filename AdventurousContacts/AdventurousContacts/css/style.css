@@ -235,3 +235,26 @@ th, thead, tfoot
     height: 30px;
     padding: 2%;
 }
+
+.normalTable {
+    width: 100%;
+    border: 1px solid;
+}
+
+.normalTable tr:nth-child(2n+1) {
+    background-color: #ffffff;
+}
+
+.normalTable td {
+    border: 1px solid;
+    border-collapse: collapse;
+    border-color: #353535;
+    padding: 2%;
+    text-align: center;
+    width: 46%;
+}
+
+.normalTableHeader {
+    background-color: #333333;
+    color: #ffffff;
+}

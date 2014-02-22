@@ -7,10 +7,9 @@ namespace AdventurousContacts.Models
 {
     public class Contact
     {
-        public int ContactId { get; set; }
+        public int ContactID { get; set; }
         public string EmailAddress { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-
     }
 }
