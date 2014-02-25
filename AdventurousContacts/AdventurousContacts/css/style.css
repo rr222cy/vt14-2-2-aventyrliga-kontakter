@@ -215,6 +215,13 @@ input {
     font-size: 10pt;
 }
 
+.validation-summary-error {
+    color: red;
+    font-size: 12pt;
+    font-weight: 700;
+    line-height: 150%;
+}
+
 .inputSpacing {
     margin-bottom: 20px;
 }

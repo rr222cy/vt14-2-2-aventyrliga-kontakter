@@ -20,13 +20,22 @@
                     <a href="Default.aspx">Startsidan</a>
                 </div>
             <h1>Äventyrliga Kontakter</h1>
-            </header>            
+            </header>
+            
+            <div id="MessageWrapper">
+                <article id="StatusMessage" class="green" runat="server" visible="false">
+                    <section>
+                        <h2><asp:Literal ID="StatusLitteral" runat="server"></asp:Literal></h2>
+                        <a href="#" id="CloseMessage">Stäng meddelande</a> 
+                    </section>
+                </article>            
+            </div>            
 
             <article class="grey">
                 <section>
                     <h2>Kontaktlista</h2>
                     <%-- Platshållare för valideringssummering om något gått på tok. --%>
-                    <asp:ValidationSummary runat="server" HeaderText="Följande fel inträffade vid din begäran" CssClass="field-validation-error" />
+                    <asp:ValidationSummary runat="server" HeaderText="Följande fel inträffade vid din begäran" CssClass="validation-summary-error" />
 
                     <asp:ListView ID="ContactListView" runat="server" ItemType="AdventurousContacts.Models.Contact" SelectMethod="ContactListView_GetData" DataKeyNames="ContactID" 
                         InsertMethod="ContactListView_InsertItem" UpdateMethod="ContactListView_UpdateItem" DeleteMethod="ContactListView_DeleteItem" InsertItemPosition="FirstItem">
@@ -71,13 +80,13 @@
                         <InsertItemTemplate>
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="FirstName" runat="server" Text="<%# BindItem.FirstName %>"></asp:TextBox>
+                                    <asp:TextBox ID="FirstName" runat="server" Text="<%# BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="LastName" runat="server" Text="<%# BindItem.LastName %>"></asp:TextBox>
+                                    <asp:TextBox ID="LastName" runat="server" Text="<%# BindItem.LastName %>" MaxLength="50"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="EmailAddress" runat="server" Text="<%# BindItem.EmailAddress %>"></asp:TextBox>
+                                    <asp:TextBox ID="EmailAddress" runat="server" Text="<%# BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
                                 </td>
                                 <td>
                                     <%-- Knappar för att lägga till kontakter. --%>
@@ -90,13 +99,13 @@
                         <EditItemTemplate>
                             <tr>
                                 <td>
-                                    <asp:TextBox ID="FirstName" runat="server" Text="<%# BindItem.FirstName %>"></asp:TextBox>
+                                    <asp:TextBox ID="FirstName" runat="server" Text="<%# BindItem.FirstName %>" MaxLength="50"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="LastName" runat="server" Text="<%# BindItem.LastName %>"></asp:TextBox>
+                                    <asp:TextBox ID="LastName" runat="server" Text="<%# BindItem.LastName %>" MaxLength="50"></asp:TextBox>
                                 </td>
                                 <td>
-                                    <asp:TextBox ID="EmailAddress" runat="server" Text="<%# BindItem.EmailAddress %>"></asp:TextBox>
+                                    <asp:TextBox ID="EmailAddress" runat="server" Text="<%# BindItem.EmailAddress %>" MaxLength="50"></asp:TextBox>
                                 </td>
                                 <td>
                                     <%-- Knappar för att kontakter. --%>

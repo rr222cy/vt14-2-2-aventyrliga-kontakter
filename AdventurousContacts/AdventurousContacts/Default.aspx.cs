@@ -29,7 +29,17 @@ namespace AdventurousContacts
 
         public void ContactListView_InsertItem(Contact contact)
         {
-            Service.SaveContact(contact);
+            try
+            {
+                // Lägger till kontakten i databasen, samt presenterar ett meddelande om att allt lyckats.
+                Service.SaveContact(contact);
+                StatusLitteral.Text = "Kontakten lades till!";
+                StatusMessage.Visible = true;
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Ett fel inträffade då kontakten skulle läggas till.");
+            }       
         }
 
         public void ContactListView_UpdateItem(int contactID)
@@ -46,7 +56,10 @@ namespace AdventurousContacts
             
                 if(TryUpdateModel(contact))
                 {
+                    // Uppdaterar kontakten samt presenterar ett meddelande om att allt lyckats.
                     Service.SaveContact(contact);
+                    StatusLitteral.Text = "Kontakten har uppdaterats!";
+                    StatusMessage.Visible = true;
                 }
             }
             catch (Exception)
@@ -60,7 +73,10 @@ namespace AdventurousContacts
         {
             try
             {
+                // Raderar kontakten samt presenterar ett meddelande om att allt lyckats.
                 Service.DeleteContact(contactID);
+                StatusLitteral.Text = "Kontakten raderades!";
+                StatusMessage.Visible = true;
             }
             catch (Exception)
             {
