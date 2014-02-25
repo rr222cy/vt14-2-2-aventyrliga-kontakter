@@ -1,6 +1,7 @@
 ﻿using AdventurousContacts.Models.DAL;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -27,10 +28,23 @@ namespace AdventurousContacts.Models
             return ContactDAL.GetContacts();
         }
 
+        // Hämtar alla kontakter med paginering.
+        public IEnumerable<Contact> GetContactsPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            throw new NotImplementedException();
+        }
+
         // Sparar en kontakt, endera ny eller med uppdaterad information.
         public void SaveContact(Contact contact)
         {
-            // TODO validera indatan!
+            ICollection<ValidationResult> validationResults;
+            if (!contact.Validate(out validationResults))
+            {
+                var ex = new ValidationException("Kontaktobjektet klarade inte datavalideringen.");
+                ex.Data.Add("ValidationResults", validationResults);
+                throw ex;
+            }
+
             if (contact.ContactID == 0)
             {
                 ContactDAL.InsertContact(contact);

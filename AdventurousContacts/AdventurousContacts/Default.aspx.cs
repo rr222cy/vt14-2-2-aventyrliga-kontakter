@@ -29,17 +29,20 @@ namespace AdventurousContacts
 
         public void ContactListView_InsertItem(Contact contact)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // Lägger till kontakten i databasen, samt presenterar ett meddelande om att allt lyckats.
-                Service.SaveContact(contact);
-                StatusLitteral.Text = "Kontakten lades till!";
-                StatusMessage.Visible = true;
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Ett fel inträffade då kontakten skulle läggas till.");
-            }       
+                try
+                {
+                    // Lägger till kontakten i databasen, samt presenterar ett meddelande om att allt lyckats.
+                    Service.SaveContact(contact);
+                    StatusLitteral.Text = "Kontakten lades till!";
+                    StatusMessage.Visible = true;
+                }
+                catch (Exception)
+                {
+                    ModelState.AddModelError("", "Ett fel inträffade då kontakten skulle läggas till.");
+                }   
+            }              
         }
 
         public void ContactListView_UpdateItem(int contactID)

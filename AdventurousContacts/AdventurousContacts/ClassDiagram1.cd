@@ -15,30 +15,30 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AdventurousContacts.Models.Contact">
-    <Position X="6.5" Y="0.5" Width="2.75" />
+    <Position X="3.25" Y="0.5" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgAAAAg=</HashCode>
       <FileName>Models\Contact.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AdventurousContacts.Models.DAL.DALBase">
-    <Position X="6.75" Y="3" Width="2.75" />
+    <Position X="3.25" Y="3" Width="2.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\DAL\DALBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AdventurousContacts.Models.DAL.ContactDAL">
-    <Position X="6.75" Y="5.25" Width="3" />
+    <Position X="3.25" Y="5.25" Width="3" />
     <TypeIdentifier>
       <HashCode>AAAAAAACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAQA=</HashCode>
       <FileName>Models\DAL\ContactDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AdventurousContacts.Models.Service">
-    <Position X="11.75" Y="1.5" Width="2.75" />
+    <Position X="7.5" Y="2.25" Width="6.75" />
     <TypeIdentifier>
-      <HashCode>AAEAgAACAAAAAAAAAAAAAAAAAAAAAAAAgAAgAABAAAA=</HashCode>
+      <HashCode>AAEAgAACAAAAAAAAAAAAAAAAAgAAAAAAgAAgAABAAAA=</HashCode>
       <FileName>Models\Service.cs</FileName>
     </TypeIdentifier>
   </Class>
