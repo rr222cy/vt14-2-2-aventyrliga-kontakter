@@ -127,14 +127,43 @@ namespace AdventurousContacts.Models.DAL
                 }
                 catch
                 {
-                    throw new ApplicationException("An error occured when trying to add data to the database.");
+                    throw new ApplicationException("An error occured when trying to add a customer to the database.");
                 }
             }
         }
 
         public void UpdateContact(Contact contact)
         {
-            throw new NotImplementedException();
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Person.uspUpdateContact", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Skapar här de parametrar som måste skickas med för att lägga till en ny kontakt i databasen.
+                    cmd.Parameters.Add("@ContactID", SqlDbType.VarChar, 50).Value = contact.ContactID;
+                    cmd.Parameters.Add("@FirstName", SqlDbType.VarChar, 50).Value = contact.FirstName;
+                    cmd.Parameters.Add("@LastName", SqlDbType.VarChar, 50).Value = contact.LastName;
+                    cmd.Parameters.Add("@EmailAddress", SqlDbType.VarChar, 50).Value = contact.EmailAddress;
+
+                    // Denna parameter hämtar ut det ID kontakten som just lades till fick, dvs. ContactID.
+                    //cmd.Parameters.Add("@ContactID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+
+                    // Öppnar anslutningen till databasen.
+                    conn.Open();
+
+                    // Exekverar den lagrade proceduren - dvs. skjuter in parametrarna i en ny rad i tabellen Contact.
+                    cmd.ExecuteNonQuery();
+
+                    // Hämtar ID:t och tilldelar detta till använt Contactobjekt.
+                    //contact.ContactID = (int)cmd.Parameters["@ContactID"].Value;
+                }
+                catch
+                {
+                    throw new ApplicationException("An error occured when trying to update a customer in the database.");
+                }
+            }
         }
 
         public void DeleteContact(int contactID)
