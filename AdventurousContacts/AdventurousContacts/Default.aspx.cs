@@ -19,12 +19,53 @@ namespace AdventurousContacts
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         public IEnumerable<Contact> ContactListView_GetData()
         {
             return Service.GetContacts();
+        }
+
+        public void ContactListView_InsertItem(Contact contact)
+        {
+            Service.SaveContact(contact);
+        }
+
+        public void ContactListView_UpdateItem(int contactID)
+        {
+            try
+            {
+                var contact = Service.GetContact(contactID);
+                if (contact == null)
+                {
+                    // The item wasn't found
+                    ModelState.AddModelError("", String.Format("Item with id {0} was not found", contactID));
+                    return;
+                }
+            
+                if(TryUpdateModel(contact))
+                {
+                    Service.SaveContact(contact);
+                }
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Ett fel inträffade då kontakten skulle uppdateras.");
+            }
+        }
+
+        // The id parameter name should match the DataKeyNames value set on the control
+        public void ContactListView_DeleteItem(int contactID)
+        {
+            try
+            {
+                //Service.DeleteContact(contactID);
+            }
+            catch (Exception)
+            {
+                ModelState.AddModelError("", "Ett fel inträffade då kontakten skulle raderas.");
+            }
         }
     }
 }

@@ -25,7 +25,8 @@
             <article class="grey">
                 <section>
                     <h2>Kontaktlista</h2>
-                    <asp:ListView ID="ContactListView" runat="server" ItemType="AdventurousContacts.Models.Contact" SelectMethod="ContactListView_GetData" DataKeyNames="ContactID">
+                    <asp:ListView ID="ContactListView" runat="server" ItemType="AdventurousContacts.Models.Contact" SelectMethod="ContactListView_GetData" DataKeyNames="ContactID" 
+                        InsertMethod="ContactListView_InsertItem" UpdateMethod="ContactListView_UpdateItem" DeleteMethod="ContactListView_DeleteItem" InsertItemPosition="FirstItem">
                         <LayoutTemplate>
                             <table class="normalTable">
                                 <tr class="normalTableHeader">
@@ -38,8 +39,11 @@
                                     <th>
                                         Epost
                                     </th>
+                                    <th>
+                                        Redigera/Ta bort
+                                    </th>
                                 </tr>
-                        <%-- Platshållare varje rad i tabellen --%>
+                        <%-- Platshållare varje rad i tabellen. --%>
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                             </table>
                         </LayoutTemplate>
@@ -55,6 +59,44 @@
                             <%-- Om inget finns i databasen presenteras detta istället.  --%>
                             <p>Inga kontakter finns inlagda i databasen just nu.</p>
                         </EmptyDataTemplate>
+                        <%-- Template för att lägga till nya rader i databasen (kontakter). --%>
+                        <InsertItemTemplate>
+                            <tr>
+                                <td>
+                                    <asp:TextBox ID="FirstName" runat="server" Text="<%# BindItem.FirstName %>"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="LastName" runat="server" Text="<%# BindItem.LastName %>"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="EmailAddress" runat="server" Text="<%# BindItem.EmailAddress %>"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <%-- Knappar för att lägga till kontakter. --%>
+                                    <asp:LinkButton runat="server" CommandName="Insert" Text="Lägg till" /> / 
+                                    <asp:LinkButton runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
+                                </td>
+                            </tr>
+                        </InsertItemTemplate>
+                        <%-- Template för att uppdatera rader i databasen (kontakter). --%>
+                        <EditItemTemplate>
+                            <tr>
+                                <td>
+                                    <asp:TextBox ID="FirstName" runat="server" Text="<%# BindItem.FirstName %>"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="LastName" runat="server" Text="<%# BindItem.LastName %>"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <asp:TextBox ID="EmailAddress" runat="server" Text="<%# BindItem.EmailAddress %>"></asp:TextBox>
+                                </td>
+                                <td>
+                                    <%-- Knappar för att kontakter. --%>
+                                    <asp:LinkButton runat="server" CommandName="Update" Text="Spara" /> / 
+                                    <asp:LinkButton runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
+                                </td>
+                            </tr>
+                        </EditItemTemplate>
                     </asp:ListView>
                 </section>
             </article>
