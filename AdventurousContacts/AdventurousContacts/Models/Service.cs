@@ -40,5 +40,11 @@ namespace AdventurousContacts.Models
                 ContactDAL.UpdateContact(contact);
             }           
         }
+
+        // Raderar en kontakt
+        public void DeleteContact(int contactID)
+        {
+            ContactDAL.DeleteContact(contactID);
+        }
     }
 }

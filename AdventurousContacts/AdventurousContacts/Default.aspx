@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AdventurousContacts.Default" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="AdventurousContacts.Default" ViewStateMode="Disabled" %>
 
 <!DOCTYPE html>
 <html lang="sv">
@@ -25,6 +25,9 @@
             <article class="grey">
                 <section>
                     <h2>Kontaktlista</h2>
+                    <%-- Platshållare för valideringssummering om något gått på tok. --%>
+                    <asp:ValidationSummary runat="server" HeaderText="Följande fel inträffade vid din begäran" CssClass="field-validation-error" />
+
                     <asp:ListView ID="ContactListView" runat="server" ItemType="AdventurousContacts.Models.Contact" SelectMethod="ContactListView_GetData" DataKeyNames="ContactID" 
                         InsertMethod="ContactListView_InsertItem" UpdateMethod="ContactListView_UpdateItem" DeleteMethod="ContactListView_DeleteItem" InsertItemPosition="FirstItem">
                         <LayoutTemplate>
@@ -40,7 +43,7 @@
                                         Epost
                                     </th>
                                     <th>
-                                        Redigera/Ta bort
+                                        Hantering
                                     </th>
                                 </tr>
                         <%-- Platshållare varje rad i tabellen. --%>
@@ -53,6 +56,11 @@
                                 <td><%#: Item.FirstName %></td>
                                 <td><%#: Item.LastName %></td>
                                 <td><%#: Item.EmailAddress %></td>
+                                <td>
+                                    <%-- Knappar för att ta bort och redigera kunduppgifter. --%>
+                                    <asp:LinkButton runat="server" CommandName="Delete" Text="Ta bort" CausesValidation="false" OnClientClick='<%# Eval("FirstName", "return confirm(\"Vill du radera {0} permanent?\");") %>' />
+                                    <asp:LinkButton runat="server" CommandName="Edit" Text="Redigera" CausesValidation="false" />
+                                </td>
                             </tr>
                         </ItemTemplate>
                         <EmptyDataTemplate>
@@ -73,7 +81,7 @@
                                 </td>
                                 <td>
                                     <%-- Knappar för att lägga till kontakter. --%>
-                                    <asp:LinkButton runat="server" CommandName="Insert" Text="Lägg till" /> / 
+                                    <asp:LinkButton runat="server" CommandName="Insert" Text="Lägg till" /> 
                                     <asp:LinkButton runat="server" CommandName="Cancel" Text="Avbryt" CausesValidation="false" />
                                 </td>
                             </tr>

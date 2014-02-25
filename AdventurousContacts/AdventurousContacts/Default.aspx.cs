@@ -60,11 +60,11 @@ namespace AdventurousContacts
         {
             try
             {
-                //Service.DeleteContact(contactID);
+                Service.DeleteContact(contactID);
             }
             catch (Exception)
             {
-                ModelState.AddModelError("", "Ett fel inträffade då kontakten skulle raderas.");
+                ModelState.AddModelError(String.Empty, "Ett fel inträffade då kontakten skulle raderas.");
             }
         }
     }
