@@ -139,7 +139,25 @@ namespace AdventurousContacts.Models.DAL
 
         public void DeleteContact(int contactID)
         {
-            throw new NotImplementedException();
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var cmd = new SqlCommand("Person.uspRemoveContact", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@ContactID", SqlDbType.Int, 4).Value = contactID;
+
+                    // Öppnar anslutningen till databasen.
+                    conn.Open();
+
+                    // Exekverar den lagrade proceduren - dvs. skjuter in parametrarna i en ny rad i tabellen Contact.
+                    cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    throw new ApplicationException("An error occured when trying to add data to the database.");
+                }
+            }
         }
     }
 }
