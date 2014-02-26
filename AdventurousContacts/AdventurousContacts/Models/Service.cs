@@ -31,7 +31,7 @@ namespace AdventurousContacts.Models
         // Hämtar alla kontakter med paginering.
         public IEnumerable<Contact> GetContactsPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
         {
-            throw new NotImplementedException();
+            return ContactDAL.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
 
         // Sparar en kontakt, endera ny eller med uppdaterad information.

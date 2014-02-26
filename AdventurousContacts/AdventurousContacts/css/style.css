@@ -104,6 +104,11 @@ section {
     max-height: 180px;
 }
 
+#sitePaging {
+    margin-top: 20px;
+    font-size: 14pt;
+}
+
 /* Settings for headers and text */
 
 

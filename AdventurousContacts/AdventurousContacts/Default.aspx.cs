@@ -19,14 +19,28 @@ namespace AdventurousContacts
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            // Om en session av typen success finns skall ett meddelande med dess innehåll visas.
+            if (Session["Success"] != null)
+            {
+                StatusLitteral.Text = Session["Success"].ToString();
+                StatusMessage.Visible = true;
+                Session.Remove("Success");
+            }            
         }
 
-        public IEnumerable<Contact> ContactListView_GetData()
+        // Hämtar ut alla kontakter utan paginering.
+        //public IEnumerable<Contact> ContactListView_GetData()
+        //{
+        //    return Service.GetContacts();
+        //}
+
+        // Hämtar ut alla kontakter med paginering.
+        public IEnumerable<Contact> ContactListView_GetData(int maximumRows, int startRowIndex, out int totalRowCount)
         {
-            return Service.GetContacts();
+            return Service.GetContactsPageWise(maximumRows, startRowIndex, out totalRowCount);
         }
 
+        // Lägger till en medlem i databasen.
         public void ContactListView_InsertItem(Contact contact)
         {
             if (ModelState.IsValid)
@@ -35,8 +49,8 @@ namespace AdventurousContacts
                 {
                     // Lägger till kontakten i databasen, samt presenterar ett meddelande om att allt lyckats.
                     Service.SaveContact(contact);
-                    StatusLitteral.Text = "Kontakten lades till!";
-                    StatusMessage.Visible = true;
+                    Session["Success"] = "Kontakten lades till!";
+                    Response.Redirect(Request.UrlReferrer.ToString());
                 }
                 catch (Exception)
                 {
@@ -45,6 +59,7 @@ namespace AdventurousContacts
             }              
         }
 
+        // Uppdaterar en medlem i databasen.
         public void ContactListView_UpdateItem(int contactID)
         {
             try
@@ -61,8 +76,8 @@ namespace AdventurousContacts
                 {
                     // Uppdaterar kontakten samt presenterar ett meddelande om att allt lyckats.
                     Service.SaveContact(contact);
-                    StatusLitteral.Text = "Kontakten har uppdaterats!";
-                    StatusMessage.Visible = true;
+                    Session["Success"] = "Kontakten har uppdaterats!";
+                    Response.Redirect(Request.UrlReferrer.ToString());
                 }
             }
             catch (Exception)
@@ -78,8 +93,8 @@ namespace AdventurousContacts
             {
                 // Raderar kontakten samt presenterar ett meddelande om att allt lyckats.
                 Service.DeleteContact(contactID);
-                StatusLitteral.Text = "Kontakten raderades!";
-                StatusMessage.Visible = true;
+                Session["Success"] = "Kontakten har raderats!";
+                Response.Redirect(Request.UrlReferrer.ToString());
             }
             catch (Exception)
             {

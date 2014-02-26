@@ -29,14 +29,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AdventurousContacts.Models.DAL.ContactDAL">
-    <Position X="3.25" Y="5.25" Width="3" />
+    <Position X="1.25" Y="5.25" Width="6.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACACAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAAQA=</HashCode>
+      <HashCode>AAAAAAACACAAAAAAAAAAAAAAAgAAAAAAAAAAAAhAAQA=</HashCode>
       <FileName>Models\DAL\ContactDAL.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="AdventurousContacts.Models.Service">
-    <Position X="7.5" Y="2.25" Width="6.75" />
+    <Position X="7.5" Y="1" Width="6.75" />
     <TypeIdentifier>
       <HashCode>AAEAgAACAAAAAAAAAAAAAAAAAgAAAAAAgAAgAABAAAA=</HashCode>
       <FileName>Models\Service.cs</FileName>

@@ -58,6 +58,15 @@
                         <%-- Platshållare varje rad i tabellen. --%>
                         <asp:PlaceHolder ID="itemPlaceholder" runat="server" />
                             </table>
+                            <div id="sitePaging">
+                                <asp:DataPager ID="DataPager" runat="server" PageSize="20" QueryStringField="Page">
+                                    <Fields>
+                                        <asp:NextPreviousPagerField ShowFirstPageButton="True" FirstPageText=" Första " ShowNextPageButton="False" ShowPreviousPageButton="True" ButtonType="Button"  />
+                                        <asp:NumericPagerField ButtonType="Link" />
+                                        <asp:NextPreviousPagerField ShowLastPageButton="True" LastPageText=" Sista " ShowNextPageButton="True" ShowPreviousPageButton="False" ButtonType="Button"  />
+                                    </Fields>
+                                </asp:DataPager>
+                            </div>
                         </LayoutTemplate>
                         <ItemTemplate>
                             <%-- Mall för varje rad i databasen, dvs varje rad i tabellen som loopas fram.  --%>
@@ -114,6 +123,7 @@
                                 </td>
                             </tr>
                         </EditItemTemplate>
+
                     </asp:ListView>
                 </section>
             </article>

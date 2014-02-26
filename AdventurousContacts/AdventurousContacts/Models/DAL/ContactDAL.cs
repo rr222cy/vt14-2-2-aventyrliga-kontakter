@@ -54,6 +54,58 @@ namespace AdventurousContacts.Models.DAL
             }
         }
 
+        public IEnumerable<Contact> GetContactsPageWise(int maximumRows, int startRowIndex, out int totalRowCount)
+        {
+            using (var conn = CreateConnection())
+            {
+                try
+                {
+                    var contacts = new List<Contact>(100);
+
+                    var cmd = new SqlCommand("Person.uspGetContactsPageWise", conn);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.Add("@PageSize", SqlDbType.Int, 4).Value = maximumRows;
+                    cmd.Parameters.Add("@PageIndex", SqlDbType.Int, 4).Value = (startRowIndex / maximumRows) + 1;                 
+                    cmd.Parameters.Add("@RecordCount", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+
+                    conn.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    totalRowCount = (int)cmd.Parameters["@RecordCount"].Value;
+
+                    // Skapar referens till data utläst från databasen.
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        // Tar här reda på vilket index min databas olika kolumner har.
+                        var contactIdIndex = reader.GetOrdinal("ContactID");
+                        var firstNameIndex = reader.GetOrdinal("FirstName");
+                        var lastNameIndex = reader.GetOrdinal("LastName");
+                        var emailAddressIndex = reader.GetOrdinal("EmailAddress");
+
+                        while (reader.Read())
+                        {
+                            contacts.Add(new Contact
+                            {
+                                ContactID = reader.GetInt32(contactIdIndex),
+                                FirstName = reader.GetString(firstNameIndex),
+                                LastName = reader.GetString(lastNameIndex),
+                                EmailAddress = reader.GetString(emailAddressIndex)
+                            });
+                        }
+                    }
+
+                    contacts.TrimExcess();
+                    return contacts;
+                }
+                catch
+                {
+                    throw new ApplicationException("An error occured when trying to access and get data from database.");
+                }
+            }
+        }
+
         public Contact GetContactByID(int contactID)
         {
             using (var conn = CreateConnection())

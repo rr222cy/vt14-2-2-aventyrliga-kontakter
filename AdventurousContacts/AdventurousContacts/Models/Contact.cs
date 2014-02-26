@@ -6,6 +6,7 @@ using System.Web;
 
 namespace AdventurousContacts.Models
 {
+    // Klass för mitt kontaktobjekt, använder dataannotations för att validera indata.
     public class Contact
     {
         public int ContactID { get; set; }
